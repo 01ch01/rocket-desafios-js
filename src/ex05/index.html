@@ -6,6 +6,17 @@
     <title>Document</title>
   </head>
   <body>
+    <header>
+      <h1>Search GitHub user's repositories</h1>
+    </header>
+    <main>
+      Insert GitHub username here:
+      <input type="text" name="user" id="user" />
+      <button onclick="find()">Find!</button>
+      <ul class="list"></ul>
+    </main>
+
+    <!-- axios API -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
   </body>
