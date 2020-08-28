@@ -13,19 +13,29 @@ function find() {
   let user = inputElement.value;
   let ulElement = document.querySelector('.list');
 
+  ulElement.innerHTML = 'Carregando...';
+
   axios
     .get('https://api.github.com/users/' + user + '/repos')
-    .then(function (result) {
-      console.log(result);
-      for (let i = 0; i < result.data.length; i++) {
+    .then(function (response) {
+      ulElement.innerHTML = '';
+      for (let i = 0; i < response.data.length; i++) {
         let liElement = document.createElement('li');
-        liElement.innerHTML = result.data[i].name;
+        liElement.innerHTML = response.data[i].name;
         ulElement.appendChild(liElement);
       }
     })
-    .catch((err) => {
-      ulElement.innerHTML = 'User not found';
-      console.warn(err);
+    .catch((error) => {
+      ulElement.innerHTML = '';
+      console.log(error.toJSON());
+
+      if (error.response.status == 404) {
+        ulElement.innerHTML = 'User not found';
+      } else if (error.response.status === 403) {
+        ulElement.innerHTML = 'Rate limit exceed';
+      } else {
+        console.warn(error);
+      }
     });
   inputElement.value = '';
 }
