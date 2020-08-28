@@ -13,19 +13,19 @@ function find() {
   let user = inputElement.value;
   let ulElement = document.querySelector('.list');
 
-  btnElement.onclick = () => {
-    axios
-      .get('https://api.github.com/users/' + user + '/repos')
-      .then(function (result) {
-        console.log(result);
-        for (let i = 0; i < result.data.length; i++) {
-          let liElement = document.createElement('li');
-          liElement.innerHTML = result.data[i].name;
-          ulElement.appendChild(liElement);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  axios
+    .get('https://api.github.com/users/' + user + '/repos')
+    .then(function (result) {
+      console.log(result);
+      for (let i = 0; i < result.data.length; i++) {
+        let liElement = document.createElement('li');
+        liElement.innerHTML = result.data[i].name;
+        ulElement.appendChild(liElement);
+      }
+    })
+    .catch((err) => {
+      ulElement.innerHTML = 'User not found';
+      console.warn(err);
+    });
+  inputElement.value = '';
 }
