@@ -6,7 +6,6 @@
  */
 
 function checkAge(age) {
-  // return promise
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (age > 18) {
@@ -21,7 +20,6 @@ function checkAge(age) {
 function main() {
   let inputElement = document.querySelector('#age');
   let age = inputElement.value;
-  console.log(age);
 
   checkAge(age)
     .then((response) => {
