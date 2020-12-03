@@ -8,7 +8,6 @@
 
 function find() {
   let inputElement = document.querySelector('#user');
-  let btnElement = document.querySelector('button');
 
   let user = inputElement.value;
   let ulElement = document.querySelector('.list');
@@ -19,14 +18,18 @@ function find() {
     .get('https://api.github.com/users/' + user + '/repos')
     .then(function (response) {
       ulElement.innerHTML = '';
+
       for (let i = 0; i < response.data.length; i++) {
         let liElement = document.createElement('li');
+
         liElement.innerHTML = response.data[i].name;
+
         ulElement.appendChild(liElement);
       }
     })
-    .catch((error) => {
+    .catch(error => {
       ulElement.innerHTML = '';
+
       console.log(error.toJSON());
 
       if (error.response.status == 404) {
@@ -37,5 +40,6 @@ function find() {
         console.warn(error);
       }
     });
+
   inputElement.value = '';
 }

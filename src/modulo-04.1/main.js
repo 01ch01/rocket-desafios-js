@@ -22,10 +22,10 @@ function main() {
   let age = inputElement.value;
 
   checkAge(age)
-    .then((response) => {
+    .then(response => {
       console.log('Maior que 18 anos');
     })
-    .catch((error) => {
+    .catch(error => {
       console.log('Menor que 18 anos');
     });
 }

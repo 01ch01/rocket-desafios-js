@@ -27,13 +27,18 @@ let renderTodos = function () {
     listElement.appendChild(todoElement);
   }
 };
+
 renderTodos();
 
 let addTodo = function () {
   let todoText = inputElement.value;
+
   todos.push(todoText);
+
   inputElement.value = '';
+
   renderTodos();
+
   saveToStorage;
 };
 
@@ -42,7 +47,9 @@ buttonElement.onclick = addTodo;
 let deleteTodo = function (index) {
   // from position [index], remove 1 element
   todos.splice(index, 1);
+
   renderTodos();
+
   saveToStorage();
 };
 
